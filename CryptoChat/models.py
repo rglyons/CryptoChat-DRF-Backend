@@ -4,10 +4,10 @@ from django.db import models
 
 import json
 
-#User Model extension
-class MyUser(models.Model) :
-    user = models.OneToOneField(User)
-    public_key = models.IntegerField(default=1)
+#Public Key Model
+class PublicKey (models.Model) :
+    user = models.OneToOneField('auth.User', related_name='publicKey')
+    key = models.IntegerField(default=1)
 
 #Conversation Model
 class Conversation (models.Model) :

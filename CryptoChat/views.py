@@ -6,9 +6,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 
-from CryptoChat.models import Conversation, Message
+from CryptoChat.models import Conversation, Message, PublicKey
 from django.contrib.auth.models import User
-from CryptoChat.serializers import UserSerializer, ConversationSerializer, MessageSerializer
+from CryptoChat.serializers import UserSerializer, ConversationSerializer, MessageSerializer, PublicKeySerializer
 
 
 # Create your views here.
@@ -18,6 +18,13 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+class PublicKeyViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows public keys to be viewed or edited.
+    """
+    queryset = PublicKey.objects.all()
+    serializer_class = PublicKeySerializer
 
 class ConversationViewSet(viewsets.ModelViewSet):
     """

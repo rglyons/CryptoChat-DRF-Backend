@@ -1,4 +1,4 @@
-from CryptoChat.models import Conversation, Message
+from CryptoChat.models import Conversation, Message, PublicKey
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -9,12 +9,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                                                         view_name='conversation-detail')
     conversationFollower = serializers.HyperlinkedRelatedField(queryset=Conversation.objects.all(), many=True,
                                                         view_name='conversation-detail')
-    publicKey = serializers.IntegerField(source='myuser.public_key')
-
+    publicKey = serializers.HyperlinkedRelatedField(queryset=PublicKey.objects.all(), many=False, view_name='publickey-detail')
 
     class Meta:
         model = User
         fields = ('url', 'username', 'publicKey', 'conversationLeader', 'conversationFollower')
+
+class PublicKeySerializer(serializers.HyperlinkedModelSerializer):
+
+    user = serializers.HyperlinkedRelatedField(queryset=User.objects.all(), many=False, view_name='user-detail')
+
+    class Meta:
+        model = PublicKey
+        fields = ('url', 'key', 'user')
 
 
 class ConversationSerializer(serializers.HyperlinkedModelSerializer):

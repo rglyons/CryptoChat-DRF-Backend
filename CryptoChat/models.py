@@ -1,8 +1,13 @@
 from __future__ import unicode_literals
-
+from django.contrib.auth.models import User
 from django.db import models
 
 import json
+
+#User Model extension
+class MyUser(models.Model) :
+    user = models.OneToOneField(User)
+    public_key = models.IntegerField(default=1)
 
 #Conversation Model
 class Conversation (models.Model) :

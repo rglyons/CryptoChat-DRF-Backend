@@ -9,10 +9,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
                                                         view_name='conversation-detail')
     conversationFollower = serializers.HyperlinkedRelatedField(queryset=Conversation.objects.all(), many=True,
                                                         view_name='conversation-detail')
+    publicKey = serializers.IntegerField(source='myuser.public_key')
+
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'conversationLeader', 'conversationFollower')
+        fields = ('url', 'username', 'publicKey', 'conversationLeader', 'conversationFollower')
 
 
 class ConversationSerializer(serializers.HyperlinkedModelSerializer):

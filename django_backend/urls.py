@@ -18,13 +18,14 @@ from django.contrib import admin
 from rest_framework import routers
 from CryptoChat import views
 
+# routers convert view sets to usable API endpoints
 router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'conversations', views.ConversationViewSet)
-router.register(r'messages', views.MessageViewSet)
-router.register(r'publickeys', views.PublicKeyViewSet)
+router.register(r'users', views.UserViewSet)                    # view/edit users at http://159.203.252.197/users/
+router.register(r'conversations', views.ConversationViewSet)    # view/edit conversations at http://159.203.252.197/conversations/
+router.register(r'messages', views.MessageViewSet)              # view/edit messages at http://159.203.252.197/messages
+router.register(r'publickeys', views.PublicKeyViewSet)          # view/edit public keys at http://159.203.252.197/publickeys
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include(router.urls)),
+    url(r'^', include(router.urls)),                            # make the router patterns above usable
 ]

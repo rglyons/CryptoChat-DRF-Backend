@@ -10,8 +10,9 @@ from CryptoChat.models import Conversation, Message, PublicKey
 from django.contrib.auth.models import User
 from CryptoChat.serializers import UserSerializer, ConversationSerializer, MessageSerializer, PublicKeySerializer
 
+# Viewsets for each model - allows for data retrieval and updating
+# HTTP Request functionality is built in to viewsets
 
-# Create your views here.
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -33,6 +34,8 @@ class ConversationViewSet(viewsets.ModelViewSet):
     queryset = Conversation.objects.all()
     serializer_class = ConversationSerializer
 
+    # when we create a conversation, initialize the participant_1
+    # field to the username of the user who makes the request
     def perform_create(self, serializer):
         serializer.save(participant_1=self.request.user)
 
@@ -44,5 +47,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
+    # when we create a message, initialize the sentBy
+    # field to the username of the user who makes the request
     def perform_create(self, serializer):
         serializer.save(sentBy=self.request.user)

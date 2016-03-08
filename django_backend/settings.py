@@ -25,7 +25,8 @@ SECRET_KEY = 'wna*imo4!6z!-c^5r4yj!@1d4s397kl^s3b%!@@8jbquutwivt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# add our Droplet IP to list of allowed hosts
+ALLOWED_HOSTS = ['159.203.252.197']
 
 
 # Application definition
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'CryptoChat',
+    'CryptoChat',                   # add our application to this list so it will be recognized by manage.py
 ]
 
 MIDDLEWARE_CLASSES = [

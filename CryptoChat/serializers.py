@@ -40,7 +40,7 @@ class PublicKeySerializer(serializers.HyperlinkedModelSerializer):
 class ConversationSerializer(serializers.HyperlinkedModelSerializer):
 
     # take participant_1's username and use that for the serialization
-    participant_1 = serializers.ReadOnlyField(source='participant_1.username')
+    # participant_1 = serializers.ReadOnlyField(source='participant_1.username')
 
     # relate conversation to all of the messages within it
     messages = serializers.HyperlinkedRelatedField(queryset=Message.objects.all(), many=True, view_name='message-detail')
